@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -72,6 +73,24 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
+  Future alerta(BuildContext context,String j){
+    return showDialog(context: context, builder: (BuildContext context){
+      return AlertDialog(
+        title: Text('Jugador $j gano'),
+        content: const Text('Reiniciar?'),
+        actions: [
+          TextButton(onPressed: () {
+            SystemNavigator.pop();
+          }, child: Text('NO')),
+          TextButton(onPressed: () {
+            reiniciar();
+            Navigator.pop(context);
+          }, child: Text('SI')),
+        ],
+      );
+    });
+  }
+
   void click(int x, int y) {
     setState(() {
       tablero[x][y] = jugador;
@@ -94,8 +113,7 @@ class _HomePageState extends State<HomePage> {
       if (tablero[i][3 - i - 1] == jugadorAux) diagonalSec++;
     }
     if (horizontal == 3 || vertical == 3 || diagonal == 3 || diagonalSec == 3) {
-      print('$jugadorAux gano');
-      reiniciar();
+      alerta(context, jugadorAux);
     }
   }
 
