@@ -12,7 +12,7 @@ class CalcPage extends StatefulWidget {
 
 class _CalcPageState extends State<CalcPage> {
   String rawOperation = '';
-  String resultString = '123123';
+  String resultString = '';
 
   @override
   Widget build(BuildContext context) {
